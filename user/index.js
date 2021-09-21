@@ -26,7 +26,7 @@ class User {
     if(!user) {
       throw new Error('User not found!');
     }
-    const token = jwt.sign({ userId: user.id }, 'basicItCenter');
+    const token = jwt.sign({ userId: user.id }, 'hasik12345');
     console.log(token);
     await promisify(client.set).bind(client)(user.id, token);
     return { token };
@@ -34,7 +34,7 @@ class User {
 
   async logOut(token) {
 
-    const { userId } = jwt.verify(token, 'basicItCenter');
+    const { userId } = jwt.verify(token, 'hasik12345');
     const user = await UserModel.findOne({ id: userId });
     if(!user) {
       throw new Error('Sonething went wrong');
