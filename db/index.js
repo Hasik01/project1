@@ -1,6 +1,7 @@
+
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/basic', {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
 
@@ -18,10 +19,24 @@ const userSchema = new Schema({
   firstName: String,
   lastName: String,
   phone: String,
+  subscriber: Number,
 });
 
+const subscribtionSchema = {
+  source: mongoose.SchemaTypes.ObjectId,
+  target: mongoose.SchemaTypes.ObjectId,
+  state: String,
+  date: {
+    type: Date,
+    default: new Date(),
+  },
+}
+
 const UserModel = mongoose.model('users', userSchema );
+const SubscribtionModel = mongoose.model('subscribtions', subscribtionSchema);
+
 
 module.exports = {
   UserModel,
+  SubscribtionModel,
 }
